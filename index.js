@@ -1,292 +1,99 @@
-const elementoResposta = document.querySelector("#resposta")
-const inputPergunta = document.querySelector("#inputPergunta")
-const buttonPerguntar = document.querySelector('#buttonPerguntar')
-const respostas = [
-    "Certeza!",
-  "Não tenho tanta certeza.",
-  "É decididamente assim.",
-  "Não conte com isso.",
-  "Sem dúvidas!",
-  "Pergunte novamente mais tarde.",
-  "Sim, definitivamente!",
-  "Minha resposta é não.",
-  "Você pode contar com isso.",
-  "Melhor não te dizer agora.",
-  "A meu ver, sim.",
-  "Minhas fontes dizem não.",
-  "Provavelmente.",
-  "Não é possível prever agora.",
-  "Perspectiva boa.",
-  "As perspectivas não são tão boas.",
-  "Sim.",
-  "Concentre-se e pergunte novamente.",
-  "Sinais apontam que sim.",
-  "Minha pika.",
-  "Senta ni mim xerecao.",
-  "vai caga.", "Absolutamente... não sei.",
-  "A lua diz sim, mas eu digo não.",
-  "A resposta sopra com o vento.",
-  "Acho que sim, mas verifique novamente.",
-  "Adivinhe... Acertou, não sei!",
-  "Agora não posso responder, estou em uma reunião.",
-  "Apenas se os porcos voarem.",
-  "As estrelas estão alinhadas... para outra pergunta.",
-  "Até meu cachorro concorda que sim.",
-  "Bem, depende da fase da lua.",
-  "Claro! Ou não... Talvez?",
-  "Com certeza, talvez.",
-  "Como diz minha avó: 'Depende'.",
-  "Deixe-me terminar meu café e eu te digo.",
-  "Definitivamente... talvez.",
-  "Depende do seu signo do zodíaco.",
-  "Depende se a galinha atravessou a rua.",
-  "Desculpe, estou de folga hoje.",
-  "Difícil dizer, estou distraído com pizza.",
-  "E a resposta mágica é... tente outra vez.",
-  "E por que você quer saber?",
-  "Ei, isso é segredo!",
-  "Em dias de chuva, a resposta é sim.",
-  "Em um universo paralelo, a resposta é clara.",
-  "Espere, estou processando...",
-  "Estou vendo um... talvez.",
-  "Estou vendo uma grande... dúvida aqui.",
-  "Eu diria sim, mas sou apenas um conjunto de respostas.",
-  "Eu não apostaria nisso.",
-  "Eu perguntaria novamente mais tarde.",
-  "Eu preciso de mais café para responder.",
-  "Eu queria dizer sim, mas meu coração diz não.",
-  "Faça uma dança da chuva e pergunte de novo.",
-  "Hum... Vou consultar os astros.",
-  "Isso é um mistério até para mim.",
-  "Isso parece incerto.",
-  "Isso soa como uma pergunta para amanhã.",
-  "Meu conselho é: não conte com isso.",
-  "Meu gato disse que sim.",
-  "Meu gato disse que não.",
-  "Meu sexto sentido diz não.",
-  "Não acredite em tudo que você lê.",
-  "Não aposte nisso.",
-  "Não consigo ver claramente agora.",
-  "Não conte comigo para isso.",
-  "Não estou autorizado a revelar essa resposta.",
-  "Não ouvi a pergunta, pode repetir?",
-  "Não posso dizer agora, estou de férias.",
-  "Não posso prever agora, estou em horário de almoço.",
-  "Não sei, mas espero que sim.",
-  "Não sei, estou em modo de economia de energia.",
-  "Não, a menos que o destino intervenha.",
-  "Não, mas um milagre sempre pode acontecer.",
-  "Não, mas isso não significa que você não deva tentar.",
-  "Não, mas não desista!",
-  "Não, mas não perca a esperança.",
-  "Não, mas sonhar é sempre bom.",
-  "Não, mas tenho um bom pressentimento sobre isso.",
-  "Não, mas você sempre pode mudar isso.",
-  "Não, definitivamente, talvez.",
-  "Não, exceto nos dias que terminam com 'Y'.",
-  "Não, mas você pode me fazer mudar de ideia.",
-  "Não, não, e não. Talvez sim.",
-  "Não, não e não. Mas quem sabe?",
-  "Não, só na terça-feira.",
-  "Nem em seus sonhos mais loucos.",
-  "Nem eu sei a resposta para isso.",
-  "Nem o Google pode responder isso.",
-  "Nem todos os segredos devem ser revelados.",
-  "Nossos destinos estão entrelaçados... com incertezas.",
-  "O destino ainda não decidiu.",
-  "O futuro é nebuloso, tente de novo.",
-  "O futuro parece... confuso.",
-  "O que você acha?",
-  "Olhei no fundo da minha xícara de café e ainda não sei.",
-  "Os astros estão silenciosos sobre isso.",
-  "Os deuses ainda não me disseram.",
-  "Parece bom... mas não posso prometer.",
-  "Parece que não.",
-  "Parece que sim, mas sem garantias.",
-  "Pergunta difícil, tenta outra.",
-  "Pergunte de novo amanhã.",
-  "Pergunte de novo quando as estrelas alinharem.",
-  "Pergunte de novo, não estava prestando atenção.",
-  "Pode ser que sim, pode ser que não.",
-  "Possivelmente, mas não aposte nisso.",
-  "Provavelmente não, mas sonhos podem se tornar realidade.",
-  "Provavelmente não, mas você nunca sabe.",
-  "Provavelmente não, mas... surpresas acontecem.",
-  "Provavelmente sim, mas não me cobra depois.",
-  "Quando porcos voarem, talvez.",
-  "Que a sorte esteja a seu favor.",
-  "Que pergunta interessante... próxima!",
-  "Quem sabe no próximo ano.",
-  "Quem sabe, quem sabe...",
-  "Só em dias que terminam com 'Y'.",
-  "Só no dia de São Nunca.",
-  "Só se os anjos cantarem.",
-  "Só se os peixes voarem.",
-  "Só se os planetas se alinharem.",
-  "Só se você acreditar!",
-  "Só um momento, estou consultando os oráculos.",
-  "Talvez em um universo alternativo.",
-  "Talvez no mundo da fantasia.",
-  "Talvez, mas não conte com isso.",
-  "Talvez, mas não segure a respiração.",
-  "Talvez, mas você não vai gostar da resposta.",
-  "Talvez, se as estrelas permitirem.",
-  "Talvez, se você for muito, muito legal.",
-  "Talvez. Quer apostar?",
-  "Tente novamente mais tarde, estou ocupado agora.",
-  "Vai ser difícil, mas não impossível.",
-  "Vamos deixar essa resposta para o universo.",
-  "Vamos ver o que acontece.",
-  "Você acredita em milagres?",
-  "Você não quer saber a resposta.",
-  "Você só saberá se tentar.",
-  "A resposta está além do meu alcance.",
-  "A resposta está dançando em algum lugar.",
-  "A sabedoria do universo diz... talvez.",
-  "A vida é incerta e essa resposta também.",
-  "Acho que a sorte está do seu lado.",
-  "Acho que é hora de jogar uma moeda.",
-  "Ainda estou calculando a resposta.",
-  "Alguém disse sim, mas não fui eu.",
-  "Alguém lá em cima sabe, mas eu não.",
-  "Antes, me diga os números da loteria.",
-  "As chances são... eu realmente não sei.",
-  "As ondas cósmicas estão confusas.",
-  "As respostas estão no vento.",
-  "As estrelas estão em silêncio hoje.",
-  "Até os sábios estão confusos com essa.",
-  "Atire uma flecha e veja onde cai.",
-  "Bem, isso é um enigma.",
-  "Bola de cristal diz: 'Talvez mais tarde.'",
-  "Caiu na rede é peixe... ou não.",
-  "Certeza absoluta? Nem tanto.",
-  "Chances são como biscoitos, quebráveis.",
-  "Coloque isso no gelo e pergunte depois.",
-  "Com uma pitada de sorte, talvez.",
-  "Consultarei os espíritos para você.",
-  "Deixe a poeira baixar e pergunte novamente.",
-  "Deixe que os dados decidam.",
-  "Depende da cor do céu.",
-  "Depende da direção do vento.",
-  "Depende da sua determinação.",
-  "Depende de quantas estrelas estão visíveis.",
-  "Depende do alinhamento planetário.",
-  "Depende do humor dos deuses.",
-  "Depende se o sol nascer amanhã.",
-  "Deveria te dizer, mas esqueci.",
-  "Diga-me primeiro, qual é o seu signo?",
-  "Diz a lenda que a resposta é sim.",
-  "Dizem que sim, mas eu digo não sei.",
-  "E se eu disser sim, você acredita?",
-  "E se fosse sim? E se fosse não?",
-  "E se te dissesse que a resposta é um mistério?",
-  "É hora de consultar a bola 8.",
-  "É mais complicado do que parece.",
-  "É um segredo muito bem guardado.",
-  "É uma pergunta para os deuses.",
-  "Elas dizem sim, eles dizem não.",
-  "Em um mundo perfeito, a resposta é sim.",
-  "Em um mundo perfeito, seria um sim claro.",
-  "Em um universo paralelo, com certeza.",
-  "Em um universo paralelo, definitivamente sim.",
-  "Em uma galáxia distante, talvez.",
-  "Em uma galáxia muito, muito distante... sim.",
-  "Encontre a resposta nas estrelas.",
-  "Enquanto isso, em outro universo...",
-  "Espera aí, deixe-me checar minha bola de cristal.",
-  "Espera, estou tentando ler os sinais.",
-  "Está escrito nas estrelas... ou não.",
-  "Estou vendo uma luz no fim do túnel.",
-  "Estou vendo algo... nebuloso.",
-  "Estou vendo... ah, é só poeira.",
-  "Estrelas dizem sim, cartas dizem não.",
-  "Eu diria que sim, mas quem sou eu?",
-  "Eu diria sim, mas minha bola de cristal quebrou.",
-  "Eu não sou vidente, mas diria que sim.",
-  "Eu preferiria não dizer.",
-  "Eu queria dizer sim, mas não posso.",
-  "Eu realmente gostaria de saber também.",
-  "Eu teria que consultar os anciãos.",
-  "Eu vou consultar minha bola de cristal.",
-  "Faça uma pergunta mais fácil, por favor.",
-  "Fale comigo na próxima lua cheia.",
-  "Fale comigo quando Mercúrio não estiver retrógrado.",
-  "Feche os olhos e a resposta aparecerá.",
-  "Feche os olhos e imagine a resposta.",
-  "Fique atento aos sinais.",
-  "Fique atento, a resposta está chegando.",
-  "Isso exigiria uma bola de cristal.",
-  "Isso me parece um mistério.",
-  "Isso é algo que o tempo dirá.",
-  "Isso é um mistério até para mim.",
-  "Isso é um segredo que nem eu sei.",
-  "Isso parece uma pergunta para seu coração.",
-  "Isso soa como um talvez.",
-  "Jogue uma moeda e descubra.",
-  "Lance os dados e veja o resultado.",
-  "Lance os dados, a resposta está neles.",
-  "Leia as folhas de chá para a resposta.",
-  "Me dê um minuto, estou pensando...",
-  "Me pergunte amanhã e eu talvez saiba.",
-  "Me pergunte na próxima semana.",
-  "Melhor jogar uma moeda para decidir.",
-  "Melhor não estragar a surpresa.",
-  "Melhor perguntar a um mágico.",
-  "Melhor você não saber agora.",
-  "Minha bola de cristal está em manutenção.",
-  "Minha bola de cristal está embaçada.",
-  "Minha bola de cristal está nebulosa.",
-  "Minha bola de cristal não está funcionando.",
-  "Minha bola de cristal precisa de pilhas novas.",
-  "Minha bola de cristal quebrou, desculpe.",
-  "Minha bola de cristal está de férias.",
-  "Minha intuição diz que sim.",
-  "Minha resposta é tão nebulosa quanto sua pergunta.",
-  "Não apostaria todas as minhas fichas nisso.",
-  "Não conte com isso, mas quem sabe?",
-  "Não conte com isso, mas... talvez.",
-  "Não conte com isso, mas... você decide.",
-  "Não é dia de dar respostas certeiras.",
-  "Não estou me sentindo muito profético hoje.",
-  "Não faço ideia, mas estou torcendo por você.",
-  "Não posso te dizer, seria trapacear.",
-  "Não posso te dizer, é um segredo.",
-  "Não posso te dizer, mas estou torcendo.",
-  "Não posso te dizer, mas estou torcendo por você.",
-  "Não posso te dizer, é contra as regras.",
-  "Não sei, mas estou torcendo por você.", "Não tenho certeza, mas estou torcendo por você.",
-]
+const elementoResposta = document.querySelector("#resposta");
+const inputPergunta = document.querySelector("#inputPergunta");
+const buttonPerguntar = document.querySelector("#buttonPerguntar");
 
+// Mapeamento de palavras-chave para respostas relevantes
+const respostasPorPalavraChave = {
+    "tempo": ["Será que vai chover amanhã?", "Vai ser um dia ensolarado."],
+    "emprego": ["Você deveria considerar aceitar o novo emprego.", "Não perca essa oportunidade."],
+    "investir": ["Sim, é um bom momento para investir.", "Talvez seja melhor esperar um pouco."],
+    "exame": ["Estude mais para aumentar suas chances de passar.", "Confie no seu esforço e estude bastante."],
+    "convencer": ["Tente apresentar seus argumentos de forma clara e persuasiva.", "Respeite a decisão dos seus pais."],
+    "carro": ["Pesquise bem antes de comprar.", "Considere fazer uma revisão detalhada antes de decidir."],
+    "confiar": ["Confiança é fundamental, avalie bem antes de confiar completamente.", "Construa confiança com base em ações consistentes."],
+    "estudar": ["Dedique tempo e esforço aos estudos, isso é fundamental para o sucesso.", "A persistência nos estudos traz resultados."],
+    "persuadir": ["Conheça bem o seu público-alvo e adapte sua abordagem de acordo.", "Apresente argumentos sólidos e baseados em fatos."],
+    "viagem": ["Viajar pode trazer novas experiências e crescimento pessoal.", "Pondere os prós e contras antes de decidir."],
+    "aumento": ["Se você acredita que merece e tem argumentos sólidos, pode ser uma boa ideia pedir um aumento.", "Considere seu desempenho e contribuição para a empresa antes de solicitar um aumento."],
+    "ações": ["Investir em ações pode ser lucrativo, mas também envolve riscos.", "Analise bem o mercado e busque orientação de especialistas antes de investir."],
+    "mudar": ["Mudar pode trazer novas oportunidades e experiências enriquecedoras.", "Considere os prós e contras da mudança antes de tomar uma decisão."],
+    "desculpas": ["Pedir desculpas é um sinal de maturidade e respeito.", "Se você errou, admita e peça desculpas sinceramente."],
+    "hobby": ["Dedicar tempo ao seu hobby pode ser uma ótima maneira de relaxar e se divertir.", "Se o seu hobby te traz felicidade, vale a pena dedicar tempo a ele."],
+    "curso": ["Fazer um curso avançado pode ajudá-lo a adquirir novas habilidades e avançar em sua carreira.", "Considere se o curso está alinhado com seus objetivos e interesses antes de se matricular."],
+    "casa": ["Encontrar uma nova casa pode ser emocionante, mas certifique-se de considerar sua situação financeira e necessidades antes de decidir.", "Pondere a localização, o tamanho e o custo da casa antes de tomar uma decisão."],
+    "emprestar": ["Emprestar dinheiro para um amigo pode afetar seu relacionamento, avalie se você está confortável com isso.", "Considere suas próprias necessidades financeiras antes de emprestar dinheiro para outras pessoas."],
+    "confrontar": ["Confrontar seu chefe pode ser necessário em certas situações, mas avalie os possíveis impactos antes de agir.", "Escolha o momento e o local adequados para abordar o problema com seu chefe."],
+    "previsões": ["As previsões do mercado financeiro podem fornecer insights, mas lembre-se de que nem sempre são precisas.", "Analise várias fontes de informação antes de tomar decisões com base em previsões de mercado."],
+    "político": ["É importante questionar as promessas feitas por políticos e analisar suas ações passadas.", "Considere os valores e propostas do político antes de confiar em suas promessas."],
+    "família": ["O apoio da família pode ser fundamental em momentos importantes da vida, mas lembre-se de que você é responsável por suas próprias decisões.", "Converse com sua família e compartilhe seus planos e preocupações antes de tomar uma decisão importante."],
+    "sorte": ["A sorte pode desempenhar um papel, mas é importante trabalhar duro e se preparar para aproveitar as oportunidades.", "Acreditar em si mesmo e persistir pode ser mais importante do que depender apenas da sorte."],
+    "saúde": ["Priorize sua saúde e bem-estar em todas as decisões que tomar.", "Consulte um profissional de saúde para obter orientação sobre questões relacionadas à sua saúde."],
+    "amor": ["O amor é uma parte importante da vida, mas lembre-se de valorizar a si mesmo em primeiro lugar.", "Escolha relacionamentos que sejam saudáveis e te façam crescer como pessoa."],
+    "viagem": ["Viajar pode expandir seus horizontes e proporcionar experiências inesquecíveis.", "Planeje sua viagem com antecedência para aproveitar ao máximo."],
+  "saúde": ["Priorize sua saúde física e mental em todas as decisões que tomar.", "Cuide bem de si mesmo e procure ajuda profissional quando necessário."],
+  "amor": ["O amor é um aspecto fundamental da vida humana e pode trazer grande felicidade.", "Valorize os relacionamentos significativos em sua vida."],
+  "educação": ["A educação é a chave para o crescimento pessoal e profissional.", "Continue aprendendo e buscando conhecimento ao longo da vida."],
+  "carreira": ["Invista em desenvolvimento profissional e busque oportunidades de crescimento.", "Encontre um equilíbrio saudável entre trabalho e vida pessoal."],
+  "felicidade": ["Busque a felicidade nas pequenas coisas da vida e em conexões significativas com os outros.", "Cultive hábitos positivos que promovam seu bem-estar emocional."],
+  "sucesso": ["Defina o sucesso de acordo com seus próprios valores e objetivos.", "Persista, aprenda com os fracassos e celebre suas conquistas."],
+  "autoconfiança": ["Acredite em si mesmo e em suas habilidades para enfrentar desafios.", "Desenvolva uma mentalidade positiva e trabalhe para superar a autodúvida."],
+  "resiliência": ["A resiliência é a capacidade de se adaptar e se recuperar diante das adversidades.", "Cultive a resiliência através da aceitação, do apoio social e do desenvolvimento de habilidades de enfrentamento."],
+  "propósito": ["Descubra e siga seu propósito na vida, buscando significado e realização pessoal.", "Estabeleça metas alinhadas com seus valores e paixões."],
+    "educar": ["A educação é um investimento valioso no seu futuro.", "Busque oportunidades de aprendizado ao longo da vida para continuar crescendo e se desenvolvendo."],
+    // Adicione mais palavras-chave e respostas relevantes conforme necessário
+  };
+  
+
+/// Função para selecionar uma resposta com base nas palavras-chave
+function selecionarResposta(palavrasChave) {
+    let respostasDisponiveis = [];
+  
+    // Iterar sobre todas as palavras-chave
+    for (let palavraChave in respostasPorPalavraChave) {
+      // Iterar sobre todas as palavras da pergunta
+      for (let palavra of palavrasChave) {
+        if (palavraChave.includes(palavra)) {
+          respostasDisponiveis = respostasDisponiveis.concat(respostasPorPalavraChave[palavraChave]);
+        }
+      }
+    }
+  
+    // Se houver respostas disponíveis com base nas palavras-chave
+    if (respostasDisponiveis.length > 0) {
+      const indice = Math.floor(Math.random() * respostasDisponiveis.length);
+      return respostasDisponiveis[indice];
+    } else {
+      // Se não houver respostas disponíveis com base nas palavras-chave
+      // Crie uma resposta genérica
+      const respostasGenericas = [
+        "Interessante, poderia explicar mais sobre isso?",
+        "Fascinante! Você gostaria de expandir seu pensamento?",
+        "Parece intrigante. Você tem alguma outra pergunta?",
+        "Desculpe, não consigo responder a essa pergunta no momento."
+      ];
+      const indice = Math.floor(Math.random() * respostasGenericas.length);
+      return respostasGenericas[indice];
+    }
+  }
+  
 // Clicar em fazer pergunta
 function fazerPergunta() {
-    if(inputPergunta.value == "") {
-        alert("Digite sua pergunta")
-        return
-    }
+  const pergunta = inputPergunta.value.toLowerCase();
+  if (pergunta === "") {
+    alert("Digite sua pergunta");
+    return;
+  }
 
-    buttonPerguntar.setAttribute("disabled", true)
+  buttonPerguntar.setAttribute("disabled", true);
 
-    const pergunta = "<div>" + inputPergunta.value + "</div>"
-    let totalRespostas = respostas.length;
-    let numeroAleatorio;
+  const palavrasChave = pergunta.split(" ");
+  const resposta = selecionarResposta(palavrasChave);
+  
+  elementoResposta.innerHTML = pergunta + "<br>" + resposta;
+  elementoResposta.style.opacity = 1;
 
-    // Example: Check for "climate change" keyword and select a response related to environment
-    if (inputPergunta.value.toLowerCase().includes("climate change")) {
-        // Filter responses related to environment
-        const respostasEnvironment = respostas.filter(resposta => resposta.toLowerCase().includes("environment"));
-        totalRespostas = respostasEnvironment.length;
-        numeroAleatorio = Math.floor(Math.random() * totalRespostas);
-        elementoResposta.innerHTML = pergunta + respostasEnvironment[numeroAleatorio];
-    } else {
-        // If no specific keyword is detected, select a random response
-        numeroAleatorio = Math.floor(Math.random() * totalRespostas);
-        elementoResposta.innerHTML = pergunta + respostas[numeroAleatorio];
-    }
-
-    elementoResposta.style.opacity =  1;
-
-    setTimeout(function() {
-        elementoResposta.style.opacity =  0;
-        buttonPerguntar.removeAttribute("disabled")
-    },  4000)
+  setTimeout(function () {
+    elementoResposta.style.opacity = 0;
+    buttonPerguntar.removeAttribute("disabled");
+  }, 4000);
 }

@@ -14,8 +14,18 @@ body {
 }
 
 img {
-    margin-top: 00%;
+    margin-top: 0%;
+    transition: filter 0.3s ease, box-shadow 0.3s ease; /* Adiciona transição suave */
+    border-radius: 8px; /* Define o raio da borda para 8 pixels */
 }
+
+img:hover {
+    filter: brightness(120%); /* Aumenta o brilho em 20% quando o mouse passa por cima */
+    
+}
+
+
+
 
 
 #container {
@@ -39,6 +49,7 @@ h1 {
     margin-top: 40px;
     margin-bottom: 10px;
     opacity: 0.9;
+
 }
 
 p {
